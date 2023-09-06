@@ -1,5 +1,6 @@
 import streamlit as st
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 # Function to check if a year is a leap year
 def is_leap_year(year):
@@ -12,11 +13,14 @@ def is_leap_year(year):
 def calculate_interest(principal, rate, start_date, end_date):
     # Calculate the number of days between start_date and end_date
     days = (end_date - start_date).days
-    year = start_date.year
-    days_in_year = 366 if is_leap_year(year) else 365
+    #year = start_date.year
+    if is_leap_year(start_date.year) or is_leap_year(end_date.year):
+        days_in_year = 366 
+    else:
+        days_in_year = 365 
 
     # Calculate the interest
-    interest = (principal * rate / days_in_year) * days  # Assuming 365 days in a year
+    interest = (principal * rate  * days/ (days_in_year*100))
     return interest
 
 
@@ -24,25 +28,25 @@ def calculate_interest(principal, rate, start_date, end_date):
 st.title("Due Date Calculator")
 st.write("Enter the principle amount, issue date, and number of months to calculate the due date.")
 
+#prereq
+current_datetime = datetime.now() #current date and time
+current_date = current_datetime.date() #current date
+
 # User input fields
-#principle amount
-principle = st.number_input("Principle amount", min_value=0.00, step=0.01)
-#issue date
-issue_date = st.date_input("Issue Date")
-#current date and time
-current_datetime = datetime.now()
-#current date
-current_date = current_datetime.date()
-#number of months
-num_months = st.number_input("Number of Months", min_value=1, step=1)
+principle = st.number_input("Principle amount", min_value=0.00, step=0.01) #principle amount
+issue_date = st.date_input("Issue Date",format="DD.MM.YYYY") #issue date
+num_months = st.number_input("Number of Months", min_value=1, step=1) #number of months
+interest_rate = st.number_input("Interest Rate", min_value=0.00, step=0.01) #rate of interest
+penal_interest_rate = st.number_input("Penal Interest Rate", min_value=0.00, step=0.01) #penal interest rate
+
+
 #calculate and display due date
-due_date = issue_date + timedelta(days=num_months * 30)
+due_date = issue_date + relativedelta(months=+num_months)
 st.write(f"Today's Date: {current_date.strftime('%d-%m-%Y')}")
 st.write(f"Due Date: {due_date.strftime('%d-%m-%Y')}")
-st.write("Number of days:",  (current_date - issue_date).days)
-#rate of interest
-interest_rate = st.number_input("Interest Rate", min_value=0.00, step=0.01)
-penal_interest_rate = st.number_input("Penal Interest Rate", min_value=0.00, step=0.01)
+if (current_date - issue_date).days > 0:
+    st.write("Number of days passed till today:",  (current_date - issue_date).days)
+st.write("Total number of days:",  (due_date - issue_date).days)
 
 # Calculate the interest until the due date
 interest_until_due_date = calculate_interest(principle, interest_rate, issue_date, due_date)
@@ -51,6 +55,7 @@ interest_until_due_date = calculate_interest(principle, interest_rate, issue_dat
 penal_interest = 0.0
 if current_date > due_date:
     days_past_due = (current_date - due_date).days
+    st.write("Number of days past due:", days_past_due)
     penal_interest = calculate_interest(principle, penal_interest_rate, due_date, current_date)
 
 
