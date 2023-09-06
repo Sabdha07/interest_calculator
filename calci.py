@@ -37,7 +37,9 @@ current_date = current_datetime.date()
 num_months = st.number_input("Number of Months", min_value=1, step=1)
 #calculate and display due date
 due_date = issue_date + timedelta(days=num_months * 30)
+st.write(f"Today's Date: {current_date.strftime('%d-%m-%Y')}")
 st.write(f"Due Date: {due_date.strftime('%d-%m-%Y')}")
+st.write("Number of days:",  (current_date - issue_date).days)
 #rate of interest
 interest_rate = st.number_input("Interest Rate", min_value=0.00, step=0.01)
 penal_interest_rate = st.number_input("Penal Interest Rate", min_value=0.00, step=0.01)
