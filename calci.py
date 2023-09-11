@@ -2,6 +2,12 @@ import streamlit as st
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
+# Add custom CSS to hide the GitHub icon
+hide_github_icon = """
+#GithubIcon {
+  visibility: hidden;
+}
+"""
 
 # Set the page title
 st.set_page_config(page_title="Interest Calculator", page_icon=":calculator:", layout="centered")
