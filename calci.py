@@ -37,7 +37,7 @@ st.write("Enter the principle amount, issue date, and number of months to calcul
 #current_date = current_datetime.date() #current date
 
 # User input fields
-principle = st.number_input("Principle amount", value = None) #principle amount
+principle = st.number_input("Principle amount", min_value = 0, value = None) #principle amount
 issue_date = st.date_input("Issue Date",format="DD.MM.YYYY") #issue date
 current_date = st.date_input("Current Date",format="DD.MM.YYYY") #current date
 num_months = st.number_input("Number of Months", min_value=1, step=1) #number of months
