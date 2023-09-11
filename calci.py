@@ -37,12 +37,12 @@ st.write("Enter the principle amount, issue date, and number of months to calcul
 #current_date = current_datetime.date() #current date
 
 # User input fields
-principle = st.number_input("Principle amount", min_value=0, step=0.01) #principle amount
+principle = st.number_input("Principle amount", min_value=0) #principle amount
 issue_date = st.date_input("Issue Date",format="DD.MM.YYYY") #issue date
 current_date = st.date_input("Current Date",format="DD.MM.YYYY") #current date
 num_months = st.number_input("Number of Months", min_value=1, step=1) #number of months
-interest_rate = st.number_input("Interest Rate", min_value=0, step=0.01) #rate of interest
-penal_interest_rate = st.number_input("Penal Interest Rate", min_value=0, step=0.01) #penal interest rate
+interest_rate = st.number_input("Interest Rate", min_value=0, step=0) #rate of interest
+penal_interest_rate = st.number_input("Penal Interest Rate", min_value=0, step=0) #penal interest rate
 
 
 #calculate and display due date
