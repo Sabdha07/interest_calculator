@@ -1,23 +1,30 @@
 import streamlit as st
-
-st.markdown(
-    """
-    <style>
-    .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
-    .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
-    .viewerBadge_text__1JaDK {
-        display: none;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
-
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
 # Set the page title
 st.set_page_config(page_title="Interest Calculator", page_icon=":calculator:", layout="centered")
+
+# ---- HIDE GITHUB STYLE ----
+hide_git_style = """
+            <style>
+            .css-1jc7ptx, .e1ewe7hr3, .viewerBadge_container__1QSob,
+            .styles_viewerBadge__1yB5_, .viewerBadge_link__1S137,
+            .viewerBadge_text__1JaDK {
+            display: none;}
+            </style>
+            """
+st.markdown(hide_git_style, unsafe_allow_html=True)
+
+# ---- HIDE STREAMLIT STYLE ----
+hide_st_style = """
+            <style>
+            #MainMenu {visibility: hidden;}
+            footer {visibility: hidden;}
+            header {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
 
 # Function to check if a year is a leap year
 def is_leap_year(year):
