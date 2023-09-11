@@ -2,6 +2,9 @@ import streamlit as st
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
+# Set the page title
+st.set_page_config(page_title="Interest Calculator", page_icon=":calculator:", layout="centered")
+
 st.markdown(
     """
     <style>
@@ -14,9 +17,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# Set the page title
-st.set_page_config(page_title="Interest Calculator", page_icon=":calculator:", layout="centered")
 
 # Function to check if a year is a leap year
 def is_leap_year(year):
