@@ -81,7 +81,7 @@ penal_interest = 0.0
 if current_date > due_date:
     days_past_due = (current_date - due_date).days
     st.write("Number of days past due:", days_past_due)
-    penal_interest = calculate_interest(principle, penal_interest_rate, due_date, current_date)
+    penal_interest = calculate_interest(principle, penal_interest_rate + interest_rate, due_date, current_date)
 
 
 # Calculate the due date
